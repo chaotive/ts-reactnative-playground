@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 interface SquareProps {
-    value?: string,
-    onClick?: () => any
+    value: string,
+    onClick: () => any
 }
 
-export class Square extends React.Component<SquareProps> {
+/*export class Square extends React.Component<SquareProps> {
 
     render() {
         return (
@@ -14,4 +14,12 @@ export class Square extends React.Component<SquareProps> {
                 </button>
         );
     }
+}*/
+
+export function Square(props: SquareProps) {
+    return (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    )
 }
