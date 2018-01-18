@@ -1,13 +1,3 @@
-//import * as React from 'react';
-//import * as ReactDOM from 'react-dom';
-//import App from './App';
-//import registerServiceWorker from './registerServiceWorker';
-//import './index.css';
-
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import './index.css';
-
 class Square extends React.Component {
     render() {
         return (
@@ -19,7 +9,7 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
-    renderSquare(i: number) {
+    renderSquare(i) {
         return <Square />;
     }
 
