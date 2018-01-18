@@ -17,7 +17,7 @@ export class Board extends React.Component<any, BoardProps> {
         return (
             <Square
                 value={this.state.squares[i]}
-                onClick={this.click(i)}
+                onClick={this.click.bind(this,i)}
             />
         );
     }
@@ -47,11 +47,11 @@ export class Board extends React.Component<any, BoardProps> {
         );
     }
 
-    click = (i: number) => {
-        console.log("defining ", i);
-        return () => {
-            console.log("pressed ", i)
-        }
+    click(i: number) {
+        console.log("pressed ", i);
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        this.setState({squares: squares});
     }
 
 }

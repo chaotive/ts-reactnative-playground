@@ -14,8 +14,4 @@ export class Square extends React.Component<SquareProps> {
                 </button>
         );
     }
-
-    click = () => {
-        this.setState({value: 'X'})
-    }
 }
