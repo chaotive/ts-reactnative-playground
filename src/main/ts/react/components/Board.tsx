@@ -1,15 +1,18 @@
 import * as React from "react";
-import {Square} from "./Square";
+import {Square} from "./functional/Square";
+import {TicTacToe} from "../../game/TicTacToe";
 
 interface BoardProps {
-    squares: string[]
+    squares: string[],
+    xIsNext: boolean
 }
 
 export class Board extends React.Component<any, BoardProps> {
     constructor(props: any) {
         super(props);
         this.state = {
-            squares: []
+            squares: [],
+            xIsNext: true
         }
     }
 
@@ -23,7 +26,13 @@ export class Board extends React.Component<any, BoardProps> {
     }
 
     render() {
-        const status = 'Next player: X';
+        const winner = TicTacToe.calculateWinner(this.state.squares);
+        let status;
+        if (winner) {
+            status = 'Winner: ' + winner;
+        } else {
+            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        }
 
         return (
             <div>
@@ -48,10 +57,15 @@ export class Board extends React.Component<any, BoardProps> {
     }
 
     handleClick(i: number) {
-        console.log("pressed ", i);
         const squares = this.state.squares.slice();
-        squares[i] = 'X';
-        this.setState({squares: squares});
+        if (TicTacToe.calculateWinner(squares) || squares[i]) {
+            return;
+        }
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext
+        });
     }
 
 }
