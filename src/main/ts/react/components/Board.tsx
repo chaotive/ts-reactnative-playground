@@ -1,9 +1,25 @@
 import * as React from "react";
 import {Square} from "./Square";
 
-export class Board extends React.Component {
+interface BoardProps {
+    squares: string[]
+}
+
+export class Board extends React.Component<any, BoardProps> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            squares: []
+        }
+    }
+
     renderSquare(i: number) {
-        return <Square value={i.toString()} />;
+        return (
+            <Square
+                value={this.state.squares[i]}
+                onClick={this.click(i)}
+            />
+        );
     }
 
     render() {
@@ -30,4 +46,12 @@ export class Board extends React.Component {
             </div>
         );
     }
+
+    click = (i: number) => {
+        console.log("defining ", i);
+        return () => {
+            console.log("pressed ", i)
+        }
+    }
+
 }
