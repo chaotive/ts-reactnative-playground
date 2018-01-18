@@ -9,8 +9,6 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 import {Game} from "./main/ts/react/components/Game";
 
-// ========================================
-
 ReactDOM.render(
     <Game />,
     document.getElementById('root')
