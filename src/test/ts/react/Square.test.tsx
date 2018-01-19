@@ -1,64 +1,81 @@
 import * as React from 'react';
-//import * as renderer from 'react-test-renderer';
 import {Game} from "../../../main/ts/react/components/Game";
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 
 describe('TicTacToe Game', () => {
     // using enzyme
-    it('should change state when clicking on the board', () => {
-        const game = shallow(<Game />);
-        const sq0 = game.find('button').at(0);
-        const sq1 = game.find('button').at(1);
+    it('should change state from initial state when clicking on the board', () => {
+        const game = mount(<Game />);
+        const sqs = game.find('button');
 
-        expect(game.state().xIsNext).toEqual(true);
-        sq0.simulate('click');
-        // expect(game.state().xIsNext).toEqual(false);
-        // console.log(game.state());
-        // console.log(sq0.simulate('click'))
-        // console.log(game.state());
+        expect(game.state('xIsNext')).toEqual(true);
+        expect(game.state('stepNumber')).toEqual(0);
+        expect(game.state('history')).toEqual([[]]);
+        sqs.at(0).simulate('click');
+        expect(game.state('xIsNext')).toEqual(false);
+        expect(game.state('stepNumber')).toEqual(1);
+        expect(game.state('history')).toEqual([
+            [], ["X"]
+        ]);
 
-        // sq0.simulate('click');
-        // expect(sq1.props().disabled).toEqual(true);
-        //
-        // sq0.simulate('click');
-        // expect(sq1.props().disabled).toEqual(false);
+        game.unmount()
+    });
+
+    it('should not change state when clicking on the same board square twice', () => {
+        const game = mount(<Game />);
+        const sqs = game.find('button');
+
+        sqs.at(0).simulate('click');
+        expect(game.state('xIsNext')).toEqual(false);
+        expect(game.state('stepNumber')).toEqual(1);
+        expect(game.state('history')).toEqual([
+            [], ["X"]
+        ]);
+        sqs.at(0).simulate('click');
+        expect(game.state('xIsNext')).toEqual(false);
+        expect(game.state('stepNumber')).toEqual(1);
+        expect(game.state('history')).toEqual([
+            [], ["X"]
+        ]);
+
+        game.unmount()
+    });
+
+    it('should allow you to win the game', () => {
+        const game = mount(<Game />);
+        const sqs = game.find('button');
+
+        expect(game.state('xIsNext')).toEqual(true);
+        expect(game.state('stepNumber')).toEqual(0);
+        expect(game.state('history')).toEqual([[]]);
+        sqs.at(0).simulate('click');
+        sqs.at(1).simulate('click');
+        sqs.at(4).simulate('click');
+        sqs.at(5).simulate('click');
+        sqs.at(8).simulate('click');
+        expect(game.state('xIsNext')).toEqual(false);
+        expect(game.state('stepNumber')).toEqual(5);
+        expect(game.state('history')).toEqual([
+            [],
+            ["X"],
+            ["X", "O"],
+            ["X", "O", undefined, undefined, "X"],
+            ["X", "O", undefined, undefined, "X", "O"],
+            ["X", "O", undefined, undefined, "X", "O", undefined, undefined, "X"],
+        ]);
+
+        sqs.at(2).simulate('click');
+        expect(game.state('xIsNext')).toEqual(false);
+        expect(game.state('stepNumber')).toEqual(5);
+        expect(game.state('history')).toEqual([
+            [],
+            ["X"],
+            ["X", "O"],
+            ["X", "O", undefined, undefined, "X"],
+            ["X", "O", undefined, undefined, "X", "O"],
+            ["X", "O", undefined, undefined, "X", "O", undefined, undefined, "X"],
+        ]);
+
+        game.unmount()
     });
 });
-//
-// test('Game changes state when clicked', () => {
-//     let f = (i: number) => console.log("f of " + i);
-//     let squares = [
-//         'X','O','X',
-//         '0','0','X',
-//         'X','X','0'
-//     ];
-//
-//
-//     const component = renderer.create(
-//         <Game />,
-//     );
-//     let tree = component.toJSON();
-//     expect(tree).toMatchSnapshot();
-//
-//     let b = component.getInstance()
-//
-//     console.log(tree.children);
-//
-//     component.getInstance().find()
-//
-//
-//     // manually trigger the callback
-//     // tree.props.onMouseEnter();
-//     // // re-rendering
-//     // tree = component.toJSON();
-//     // expect(tree).toMatchSnapshot();
-//
-//     // manually trigger the callback
-//     // tree.props.onMouseLeave();
-//     // // re-rendering
-//     // tree = component.toJSON();
-//     // expect(tree).toMatchSnapshot();
-// });
-//
-//
-
