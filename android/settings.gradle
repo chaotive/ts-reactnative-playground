@@ -1,0 +1,3 @@
+rootProject.name = 'ts-reactnative-playground'
+
+include ':app'
