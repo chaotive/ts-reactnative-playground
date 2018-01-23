@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Board, Squares} from "./Board";
-import * as TicTacToe from "../../game/TicTacToe";
+import * as TicTacToe from "../../../game/TicTacToe";
 
 interface GameState {
     history: Squares[],

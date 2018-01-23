@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../../main/ts/App';
+import App from '../../main/ts/react/apps/TicTacToeApp';
 
 import renderer from 'react-test-renderer';
 

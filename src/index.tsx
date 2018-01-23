@@ -7,7 +7,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
-import {Game} from "./main/ts/react/components/Game";
+import {Game} from "./main/ts/react/components/ticTacToe/Game";
 
 ReactDOM.render(
     <Game />,

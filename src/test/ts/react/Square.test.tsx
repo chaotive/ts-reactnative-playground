@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Game} from "../../../main/ts/react/components/Game";
+import {Game} from "../../../main/ts/react/components/ticTacToe/Game";
 import {shallow, mount} from 'enzyme';
 
 describe('TicTacToe Game', () => {
