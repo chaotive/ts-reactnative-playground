@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Button} from 'react-native';
 
 interface SquareProps {
     value: string,
@@ -7,8 +8,6 @@ interface SquareProps {
 
 export function Square(props: SquareProps) {
     return (
-        <button className="square" onClick={props.onClick}>
-            {props.value}
-        </button>
+        <Button title="props.value" className="square" onPress={props.onClick} />
     )
 }
