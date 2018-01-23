@@ -5,7 +5,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>It just works! so happy! :)</Text>
+        <Text>Typescript just works! so happy! :)</Text>
       </View>
     );
   }

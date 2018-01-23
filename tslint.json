@@ -1,5 +1,12 @@
 {
-    "extends": ["tslint-react"],
-    "rules": {
-    }
+  "extends": [
+    "tslint-react"
+  ],
+  "rules": {
+    "indent": [
+      true,
+      "spaces",
+      2
+    ]
+  }
 }
