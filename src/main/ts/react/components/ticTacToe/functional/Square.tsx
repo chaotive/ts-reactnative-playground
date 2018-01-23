@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 
 interface SquareProps {
     value: string,
@@ -8,6 +8,8 @@ interface SquareProps {
 
 export function Square(props: SquareProps) {
     return (
-        <Button title="props.value" className="square" onPress={props.onClick} />
+        <TouchableOpacity className="square" onPress={props.onClick}>
+          <Text>{props.value}</Text>
+        </TouchableOpacity>
     )
 }

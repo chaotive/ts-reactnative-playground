@@ -2,7 +2,7 @@ import * as React from "react";
 import {Board, Squares} from "./Board";
 import * as TicTacToe from "../../../game/TicTacToe";
 import styles from "../../styles/ticTacToe";
-import { FlatList, Button, Text, View } from 'react-native';
+import { TouchableOpacity, FlatList, Button, Text, View } from 'react-native';
 
 interface GameState {
   history: Squares[],
@@ -37,7 +37,16 @@ export default class Game extends React.Component<any, GameState> {
     });
 
     const historyData = history.map( (step, move) => {return {step: step, key: move}});
-    let moveCmp = ({item}) => (<Text>{item.step}</Text>);
+    const moveCmp = ({item}) => {
+      const desc = item.key ?
+        'Go to move #' + item.key :
+        'Go to game start';
+      return (
+        <TouchableOpacity onPress={this.jumpTo.bind(this,item.key)}>
+          <Text>{desc}</Text>
+        </TouchableOpacity>
+      );
+    };
 
     const moves = (
       <FlatList
