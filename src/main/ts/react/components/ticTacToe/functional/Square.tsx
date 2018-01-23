@@ -1,15 +1,19 @@
 import * as React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {DynamicButton} from "../../generic/DynamicButton";
+import styles from "../../../styles/ticTacToe";
 
 interface SquareProps {
     value: string,
-    onClick: () => any
+    onPress: () => any
 }
 
 export function Square(props: SquareProps) {
     return (
-        <TouchableOpacity className="square" onPress={props.onClick}>
-          <Text>{props.value}</Text>
-        </TouchableOpacity>
+        <DynamicButton
+          containerStyle={styles.squareContainer}
+          textStyle={styles.squareText}
+          onPress={props.onPress}
+          value={props.value}
+        />
     )
 }

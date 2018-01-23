@@ -2,7 +2,8 @@ import * as React from "react";
 import {Board, Squares} from "./Board";
 import * as TicTacToe from "../../../game/TicTacToe";
 import styles from "../../styles/ticTacToe";
-import { TouchableOpacity, FlatList, Button, Text, View } from 'react-native';
+import {FlatList, Text, View} from 'react-native';
+import {DynamicButton} from "../generic/DynamicButton";
 
 interface GameState {
   history: Squares[],
@@ -25,26 +26,15 @@ export default class Game extends React.Component<any, GameState> {
     const current = history[this.state.stepNumber];
     const winner = TicTacToe.calculateWinner(current);
 
-    const oldMoves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
-      return (
-        <li key={move}>
-          <Button onClick={this.jumpTo.bind(this,move)}>{desc}</Button>
-        </li>
-      );
+    const historyData = history.map( (step, move) => {
+      return {step: step, key: move}
     });
-
-    const historyData = history.map( (step, move) => {return {step: step, key: move}});
     const moveCmp = ({item}) => {
       const desc = item.key ?
         'Go to move #' + item.key :
         'Go to game start';
       return (
-        <TouchableOpacity onPress={this.jumpTo.bind(this,item.key)}>
-          <Text>{desc}</Text>
-        </TouchableOpacity>
+        <DynamicButton onPress={this.jumpTo.bind(this,item.key)} value={desc}/>
       );
     };
 
@@ -63,15 +53,16 @@ export default class Game extends React.Component<any, GameState> {
     }
 
     return (
-      <View className="game">
-        <View className="game-board">
+      <View style={styles.game}>
+        <View style={styles.gameTitle}><Text style={styles.gameTitleText}>Tic Tac Toe - Gato</Text></View>
+        <View style={styles.gameBoard}>
           <Board
             squares={current}
-            onClick={this.handleClick}
+            onPress={this.handleClick}
           />
         </View>
-        <View className="game-info">
-          <View><Text>{status}</Text></View>
+        <View style={styles.gameInfo}>
+          <View style={styles.gameInfoStatus}><Text>{status}</Text></View>
           <View>{moves}</View>
         </View>
       </View>
@@ -79,7 +70,7 @@ export default class Game extends React.Component<any, GameState> {
   }
 
   handleClick = (i: number) => {
-    console.warn("clicked " + i);
+    //console.warn("clicked " + i);
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.slice();
