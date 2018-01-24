@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Board, Squares} from "./Board";
-import * as TicTacToe from "../../../game/TicTacToe";
+import * as TicTacToe from "../../../ts/game/TicTacToe";
 import styles from "../../styles/ticTacToe";
 import {FlatList, Text, View} from 'react-native';
 import {DynamicButton} from "../generic/DynamicButton";

@@ -1,4 +1,4 @@
-import * as ttt from '../../../main/ts/game/TicTacToe'
+import * as ttt from './TicTacToe'
 
 describe('TicTacToe', () => {
 

@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.1.6",
     "@types/enzyme-adapter-react-16": "^1.0.1",
-    "@types/jest": "^22.0.1",
+    "@types/jest": "^22.1.0",
     "@types/node": "^9.3.0",
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
@@ -38,6 +38,17 @@
     "typescript": "^2.6.2"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.[jt]sx?$": "<rootDir>/jestPreprocessor.js"
+    },
+    "testMatch": [
+      "**/*.test.{js,jsx,ts,tsx}"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   }
 }

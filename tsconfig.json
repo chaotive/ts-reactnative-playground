@@ -1,19 +1,15 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "module": "es2015",
     "jsx": "react-native",
+    "noEmit": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": [ "dom", "es2015"],
+    "module": "es2015",
+    "baseUrl": "."
   },
   "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "src/test/**/*"
+    "node_modules"
   ]
 }
