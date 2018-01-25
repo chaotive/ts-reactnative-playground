@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {DynamicButton} from "../../generic/DynamicButton";
-import styles from "../../../styles/ticTacToe";
+import DynamicButton from "../generic/DynamicButton";
+import styles from "../../styles/ticTacToe";
 
 interface SquareProps {
     value: string,
     onPress: () => any
 }
 
-export function Square(props: SquareProps) {
+export default function Square(props: SquareProps) {
     return (
         <DynamicButton
           containerStyle={styles.squareContainer}

@@ -1,16 +1,15 @@
 import * as React from "react";
 import {View} from 'react-native';
-import {Square} from "./functional/Square";
+import Square from "./Square";
 import styles from "../../styles/ticTacToe";
-
-export type Squares = string[]
+import {Squares} from "../../../ts/game/TicTacToe";
 
 interface BoardProps {
   squares: Squares,
   onPress: (i: number) => any
 }
 
-export class Board extends React.Component<BoardProps> {
+export default class Board extends React.Component<BoardProps> {
   renderSquare(i: number) {
     return (
       <Square

@@ -1,24 +1,14 @@
 import * as React from "react";
-import {Board, Squares} from "./Board";
+import Board from "./Board";
 import * as TicTacToe from "../../../ts/game/TicTacToe";
 import styles from "../../styles/ticTacToe";
 import {FlatList, Text, View} from 'react-native';
-import {DynamicButton} from "../generic/DynamicButton";
+import DynamicButton from "../generic/DynamicButton";
 
-interface GameState {
-  history: Squares[],
-  stepNumber: number,
-  xIsNext: boolean
-}
-
-export default class Game extends React.Component<any, GameState> {
+export default class Game extends React.Component<any, TicTacToe.State> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      history: [[]],
-      stepNumber: 0,
-      xIsNext: true
-    }
+    this.state = TicTacToe.create()
   }
 
   render() {
@@ -69,26 +59,10 @@ export default class Game extends React.Component<any, GameState> {
     );
   }
 
-  handleClick = (i: number) => {
-    //console.warn("clicked " + i);
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.slice();
-    if (TicTacToe.calculateWinner(squares) || squares[i]) {
-      return;
-    }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({
-      history: history.concat([squares]),
-      stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
-    });
-  };
+  handleClick = (i: number) =>
+    this.setState(TicTacToe.updateSquare(this.state, this.props, i));
 
   jumpTo(step: number) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0,
-    });
+    this.setState(TicTacToe.rollBackTo(this.state, this.props, step));
   }
 }

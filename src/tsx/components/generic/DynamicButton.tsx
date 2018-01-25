@@ -8,7 +8,7 @@ interface DynamicButtonProps {
   textStyle?: StyleSheet
 }
 
-export function DynamicButton(props: DynamicButtonProps) {
+export default function DynamicButton(props: DynamicButtonProps) {
   const containerStyle = [style.containerBase].concat(props.containerStyle);
   const textStyle = [style.textBase].concat(props.textStyle);
 
