@@ -1,6 +1,6 @@
 import React from 'react';
 import Game from "../components/ticTacToe/Game";
-import {TicTacToe} from "../../ts/game/TicTacToe";
+import TicTacToe from "../../ts/game/TicTacToe";
 
 const tttState = new TicTacToe();
 

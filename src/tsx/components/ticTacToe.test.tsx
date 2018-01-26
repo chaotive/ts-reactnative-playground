@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 import Square from "./ticTacToe/Square";
 import Board from './ticTacToe/Board';
 import Game from "./ticTacToe/Game";
+import TicTacToe from "../../ts/game/TicTacToe";
 
 describe('TicTacToe components', () => {
 
@@ -18,7 +19,8 @@ describe('TicTacToe components', () => {
   });
 
   it('renders Game without crashing', () => {
-    const rendered = renderer.create(<Game />).toJSON();
+    const tttState = new TicTacToe();
+    const rendered = renderer.create(<Game data={tttState} />).toJSON();
     expect(rendered).toBeTruthy();
   });
 

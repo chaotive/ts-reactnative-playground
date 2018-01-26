@@ -2,7 +2,7 @@ import {observable} from "mobx";
 
 export type Squares = string[]
 
-export class TicTacToe {
+export default class TicTacToe {
   @observable history: Squares[];
   @observable stepNumber: number;
   @observable xIsNext: boolean;

@@ -1,10 +1,10 @@
 import * as React from "react";
 import Board from "./Board";
-import {TicTacToe} from "../../../ts/game/TicTacToe";
+import TicTacToe from "../../../ts/game/TicTacToe";
 import styles from "../../styles/ticTacToe";
 import {FlatList, Text, View} from 'react-native';
 import DynamicButton from "../generic/DynamicButton";
-import {observer} from "mobx-react/native";
+import {observer} from "mobx-react/custom";
 
 interface GameProps {
   data: TicTacToe
