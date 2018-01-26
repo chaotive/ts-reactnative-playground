@@ -1,19 +1,22 @@
 import * as React from "react";
 import Board from "./Board";
-import * as TicTacToe from "../../../ts/game/TicTacToe";
+import {TicTacToe} from "../../../ts/game/TicTacToe";
 import styles from "../../styles/ticTacToe";
 import {FlatList, Text, View} from 'react-native';
 import DynamicButton from "../generic/DynamicButton";
+import {observer} from "mobx-react/native";
 
-export default class Game extends React.Component<any, TicTacToe.State> {
-  constructor(props: any) {
-    super(props);
-    this.state = TicTacToe.create()
-  }
+interface GameProps {
+  data: TicTacToe
+}
 
+@observer
+export default class Game extends React.Component<GameProps> {
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
+    const data = this.props.data;
+
+    const history = data.history;
+    const current = history[data.stepNumber];
     const winner = TicTacToe.calculateWinner(current);
 
     const historyData = history.map( (step, move) => {
@@ -39,7 +42,7 @@ export default class Game extends React.Component<any, TicTacToe.State> {
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = 'Next player: ' + (data.xIsNext ? 'X' : 'O');
     }
 
     return (
@@ -59,10 +62,9 @@ export default class Game extends React.Component<any, TicTacToe.State> {
     );
   }
 
-  handleClick = (i: number) =>
-    this.setState(TicTacToe.updateSquare(this.state, this.props, i));
+  handleClick = (i: number) => this.props.data.updateSquare(i);
 
   jumpTo(step: number) {
-    this.setState(TicTacToe.rollBackTo(this.state, this.props, step));
+    this.props.data.rollBackTo(step);
   }
 }
