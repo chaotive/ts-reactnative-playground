@@ -8,7 +8,7 @@ export default class TicTacToe {
   @observable xIsNext: boolean;
 
   constructor() {
-    this.history = [[]];
+    this.history = [new Array(9)];
     this.stepNumber = 0;
     this.xIsNext = true;
   }
@@ -19,7 +19,7 @@ export default class TicTacToe {
   }
 
   updateSquare(i: number) {
-    console.warn("clicked " + i);
+    // console.warn("clicked " + i);
     const history = this.history.slice(0, this.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.slice();

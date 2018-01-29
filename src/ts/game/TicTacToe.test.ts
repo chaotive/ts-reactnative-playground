@@ -45,60 +45,84 @@ describe('TicTacToe', () => {
   });
 });
 
-describe('TicTacToe Game', () => {
-  // it('should change state from initial state when clicking on the board', () => {
-  //   let game = new TicTacToe();
-  //
-  //   expect(game.xIsNext).toEqual(true);
-  //   expect(game.stepNumber).toEqual(0);
-  //   expect(game.history).toEqual([[]]);
-  //
-  //   game.updateSquare(0);
-  //   expect(game.xIsNext).toEqual(false);
-  //   expect(game.stepNumber).toEqual(1);
-  //   expect(game.history).toEqual([
-  //     [], ["X"]
-  //   ]);
-  // });
-  //
-  // it('should not change state when clicking on the same board square twice', () => {
-  //   let game = new TicTacToe();
-  //
-  //   game.updateSquare(0);
-  //   expect(game.xIsNext).toEqual(false);
-  //   expect(game.stepNumber).toEqual(1);
-  //   expect(game.history).toEqual([
-  //     [], ["X"]
-  //   ]);
-  //
-  //   game.updateSquare(0);
-  //   expect(game).toBeUndefined();
-  // });
+function sliceAll(nestedArray) {
+  return nestedArray.map((ca) => ca.slice()).slice()
+}
 
-  // it('should allow you to win the game', () => {
-  //   let game = new TicTacToe();
-  //
-  //   expect(game.xIsNext).toEqual(true);
-  //   expect(game.stepNumber).toEqual(0);
-  //   expect(game.history).toEqual([[]]);
-  //
-  //   game.updateSquare(0);
-  //   game.updateSquare(1);
-  //   game.updateSquare(4);
-  //   game.updateSquare(5);
-  //   game.updateSquare(8);
-  //   expect(game.xIsNext).toEqual(false);
-  //   expect(game.stepNumber).toEqual(5);
-  //   expect(game.history).toEqual([
-  //     [],
-  //     ["X"],
-  //     ["X", "O"],
-  //     ["X", "O", undefined, undefined, "X"],
-  //     ["X", "O", undefined, undefined, "X", "O"],
-  //     ["X", "O", undefined, undefined, "X", "O", undefined, undefined, "X"],
-  //   ]);
-  //
-  //   game.updateSquare(2);
-  //   expect(game).toBeUndefined();
-  // });
+describe('TicTacToe Game', () => {
+  it('should change state from initial state when clicking on the board', () => {
+    let game = new TicTacToe();
+
+    expect(game.xIsNext).toEqual(true);
+    expect(game.stepNumber).toEqual(0);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined]
+    ]);
+
+    game.updateSquare(0);
+    expect(game.xIsNext).toEqual(false);
+    expect(game.stepNumber).toEqual(1);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined]
+    ]);
+  });
+
+  it('should not change state when clicking on the same board square twice', () => {
+    let game = new TicTacToe();
+
+    game.updateSquare(0);
+    expect(game.xIsNext).toEqual(false);
+    expect(game.stepNumber).toEqual(1);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined]
+    ]);
+
+    game.updateSquare(0);
+    expect(game.xIsNext).toEqual(false);
+    expect(game.stepNumber).toEqual(1);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined]
+    ]);
+  });
+
+  it('should allow you to win the game', () => {
+    let game = new TicTacToe();
+
+    expect(game.xIsNext).toEqual(true);
+    expect(game.stepNumber).toEqual(0);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined]
+    ]);
+
+    game.updateSquare(0);
+    game.updateSquare(1);
+    game.updateSquare(4);
+    game.updateSquare(5);
+    game.updateSquare(8);
+    expect(game.xIsNext).toEqual(false);
+    expect(game.stepNumber).toEqual(5);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", "O", undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", "O", undefined, undefined, "X", undefined,undefined, undefined, undefined],
+      ["X", "O", undefined, undefined, "X", "O", undefined, undefined,undefined],
+      ["X", "O", undefined, undefined, "X", "O", undefined, undefined, "X"],
+    ]);
+
+    game.updateSquare(2);
+    expect(game.xIsNext).toEqual(false);
+    expect(game.stepNumber).toEqual(5);
+    expect(sliceAll(game.history)).toEqual([
+      [undefined, undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", undefined, undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", "O", undefined,undefined, undefined, undefined,undefined, undefined, undefined],
+      ["X", "O", undefined, undefined, "X", undefined,undefined, undefined, undefined],
+      ["X", "O", undefined, undefined, "X", "O", undefined, undefined,undefined],
+      ["X", "O", undefined, undefined, "X", "O", undefined, undefined, "X"],
+    ]);
+  });
 });

@@ -47,7 +47,7 @@ export default class Game extends React.Component<GameProps> {
 
     return (
       <View style={styles.game}>
-        <View style={styles.gameTitle}><Text style={styles.gameTitleText}>Tic Tac Toe - Gato</Text></View>
+        <View style={styles.gameTitle}><Text style={styles.gameTitleText}>Tic Tac Toe - Gato v2</Text></View>
         <View style={styles.gameBoard}>
           <Board
             squares={current}
